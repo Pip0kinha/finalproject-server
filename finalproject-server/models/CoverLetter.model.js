@@ -6,8 +6,6 @@ const coverLetterSchema = new Schema(
     text: {
       type: String,
     },
-
-    JobId: [{ type: Schema.Types.ObjectId, ref: "Job" }],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
