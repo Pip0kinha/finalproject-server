@@ -32,3 +32,5 @@ router.delete("/job/:id", (req, res, next) => {
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
+
+module.exports = router;

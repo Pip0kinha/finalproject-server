@@ -5,8 +5,8 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-       unique: true,
-       required: true,
+      unique: true,
+      required: true,
     },
 
     password: {
@@ -16,13 +16,12 @@ const userSchema = new Schema(
     address: {
       type: String,
     },
-    jobList: [{type: Schema.Types.ObjectId, ref: [Job]}]
-},
+    jobList: [{ type: Schema.Types.ObjectId, ref: "Job" }],
+  },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
-  
 );
 
 const User = model("User", userSchema);

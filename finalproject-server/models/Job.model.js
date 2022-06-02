@@ -5,20 +5,19 @@ const jobSchema = new Schema(
   {
     title: {
       type: String,
-        required: true,
+      required: true,
     },
 
     description: {
       type: String,
       required: true,
     },
-    coverLetter: [{type: Schema.Types.ObjectId, ref: [CoverLetter]}]
-},
+    coverLetter: [{ type: Schema.Types.ObjectId, ref: "CoverLetter" }],
+  },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
-  
 );
 
 const Job = model("Job", jobSchema);

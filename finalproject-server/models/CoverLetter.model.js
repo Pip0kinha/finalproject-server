@@ -7,13 +7,12 @@ const coverLetterSchema = new Schema(
       type: String,
     },
 
-    JobId: [{type: Schema.Types.ObjectId, ref: [Job]}]
-},
+    JobId: [{ type: Schema.Types.ObjectId, ref: "Job" }],
+  },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
-  
 );
 
 const CoverLetter = model("CoverLetter", coverLetterSchema);
