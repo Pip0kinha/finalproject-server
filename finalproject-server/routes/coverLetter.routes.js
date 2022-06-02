@@ -9,7 +9,7 @@ router.post("/job/:jobId/cover-letter", async (req, res, next) => {
   try {
     // here we are preparing the prompt for our call to open AI:
     //const { title, description } = req.body;
-    /*   const title = "";
+     const title = "";
   const description = "";
 
   Job.findById(req.params)
@@ -17,17 +17,17 @@ router.post("/job/:jobId/cover-letter", async (req, res, next) => {
       title = foundJob.title;
       description = foundJob.description;
     })
-    .catch((err) => console.log(err)); */
+    .catch((err) => console.log(err));
 
     const { jobId } = req.params;
-    const writeCommand = "write a cover letter for a job";
-    //const prompt = title + " " + description + " " + writeCommand;
+    const writeCommand = "write a cover letter for this job description";
+    const prompt = title + " " + description + " " + writeCommand;
 
     //we now make the call to the API with axios:
     // https://api.openai.com/v1/engines/text-davinci-002/completions
 
     let body = {
-      prompt: writeCommand,
+      prompt: prompt,
       max_tokens: 1000,
       temperature: 0.6,
     };
