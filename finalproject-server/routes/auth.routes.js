@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
+const { isAuthenticated } = require("./../middleware/jwt.middleware.js"); // <== IMPORT
 
 // ℹ️ Handles password encryption
 const bcrypt = require("bcrypt");
@@ -108,10 +110,22 @@ router.post("/login", isLoggedOut, (req, res, next) => {
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
+        } else {
+        /* req.session.user = user; */
+          // Create an object that will be set as the token payload
+          const payload = { _id, email, name };
+
+          // Create and sign the token
+          const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+            algorithm: "HS256",
+            expiresIn: "6h",
+          });
+
+          // Send the token as the response
+          return res.status(200).json({ authToken: authToken });
         }
-        req.session.user = user;
+
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
-        return res.json(user);
       });
     })
 
@@ -130,6 +144,19 @@ router.get("/logout", isLoggedIn, (req, res) => {
     }
     res.json({ message: "Done" });
   });
+});
+
+// GET  /auth/verify  -  Used to verify JWT stored on the client
+router.get("/verify", isAuthenticated, (req, res, next) => {
+  // <== CREATE NEW ROUTE
+
+  // If JWT token is valid the payload gets decoded by the
+  // isAuthenticated middleware and made available on `req.payload`
+  console.log(`req.payload`, req.payload);
+
+  // Send back the object with user data
+  // previously set as the token payload
+  res.status(200).json(req.payload);
 });
 
 module.exports = router;
