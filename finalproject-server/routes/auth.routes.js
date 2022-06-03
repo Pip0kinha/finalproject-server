@@ -113,7 +113,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         } else {
         /* req.session.user = user; */
           // Create an object that will be set as the token payload
-          const payload = { _id, email, name };
+          const payload = {email, password };
 
           // Create and sign the token
           const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
