@@ -15,7 +15,10 @@ router.get("/user-profile", (req, res, next) => {
   const { _id } = req.payload;
   User.findById(_id)
     .populate("jobList")
-    .then((User) => res.json(User))
+    .then((user) => {
+      console.log(user);
+      res.json(user);
+    })
     .catch((err) => res.json(err));
 });
 
