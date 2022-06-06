@@ -29,8 +29,9 @@ router.put("/user-profile/:id", (req, res, next) => {
 
 router.put("/new-user/:id/form", (req, res, next) => {
   const { id } = req.params;
+  const { name, surname } = req.body;
 
-  User.findByIdAndUpdate(id, req.body, { new: true })
+  User.findByIdAndUpdate(id, { name: name, surname: surname }, { new: true })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
