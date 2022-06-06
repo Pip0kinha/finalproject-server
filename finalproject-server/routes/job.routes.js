@@ -3,6 +3,7 @@ const Job = require("../models/Job.model");
 const User = require("../models/User.model");
 
 // start handling route below:
+
 router.post("/job", (req, res, next) => {
   const { title, description, user } = req.body;
 

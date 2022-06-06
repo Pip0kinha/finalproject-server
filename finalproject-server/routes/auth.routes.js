@@ -61,6 +61,8 @@ router.post("/signup", isLoggedOut, (req, res) => {
         return User.create({
           email,
           password: hashedPassword,
+          name: "",
+          surname: "",
         });
       })
       .then((user) => {
@@ -111,9 +113,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
         if (!isSamePassword) {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
         } else {
-        /* req.session.user = user; */
+          /* req.session.user = user; */
           // Create an object that will be set as the token payload
-          const payload = {email, password };
+          const payload = { email, password };
 
           // Create and sign the token
           const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
