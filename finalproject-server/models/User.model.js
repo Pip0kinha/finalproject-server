@@ -13,7 +13,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    address: {
+    name: {
+      type: String,
+    },
+    surname: {
       type: String,
     },
     jobList: [{ type: Schema.Types.ObjectId, ref: "Job" }],

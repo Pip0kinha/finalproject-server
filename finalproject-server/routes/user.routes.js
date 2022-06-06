@@ -27,4 +27,12 @@ router.put("/user-profile/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+router.put("/new-user/:id/form", (req, res, next) => {
+  const { id } = req.params;
+
+  User.findByIdAndUpdate(id, req.body, { new: true })
+    .then((response) => res.json(response))
+    .catch((err) => res.json(err));
+});
+
 module.exports = router;
