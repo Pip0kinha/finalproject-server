@@ -12,8 +12,8 @@ const Job = require("../models/Job.model");
 
 // this is the user "landing page" with the information he/she can modify and the list of Jobs he/she already created on the website:
 router.get("/user-profile", (req, res, next) => {
-  //const { id } = req.params;
-  User.find()
+  const { _id } = req.payload;
+  User.findById(_id)
     .populate("jobList")
     .then((User) => res.json(User))
     .catch((err) => res.json(err));
