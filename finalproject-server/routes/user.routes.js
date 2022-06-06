@@ -12,7 +12,8 @@ const Job = require("../models/Job.model");
 
 // this is the user "landing page" with the information he/she can modify and the list of Jobs he/she already created on the website:
 router.get("/user-profile/:id", (req, res, next) => {
-  User.find()
+  const { id } = req.params;
+  User.findById(id)
     .populate("jobList")
     .then((User) => res.json(User))
     .catch((err) => res.json(err));
@@ -20,9 +21,9 @@ router.get("/user-profile/:id", (req, res, next) => {
 
 // the below route is on the user profile when he/she edits it to then create the cover letter (in the CL flow)
 router.put("/user-profile/:id", (req, res, next) => {
-  const { userId } = req.params;
+  const { id } = req.params;
 
-  User.findByIdAndUpdate(userId, req.body, { new: true })
+  User.findByIdAndUpdate(id, req.body, { new: true })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });
